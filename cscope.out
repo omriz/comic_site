@@ -1,0 +1,275 @@
+cscope 15 /home/action/workspace/comic_site -c 0000002250
+	@./comicsite/manage.py
+
+2 import 
+	~os
+
+3 import 
+	~sys
+
+5 if 
+__name__
+ == "__main__" :
+
+6 
+os
+ . 
+environ
+ . 
+	`setdefault
+ ( "DJANGO_SETTINGS_MODULE" , "comicsite.settings" )
+
+8 from 
+	~django.core.management
+ import 
+execute_from_command_line
+
+10 
+	`execute_from_command_line
+ ( 
+sys
+ . 
+argv
+ )
+
+
+	@./comicsite/comicsite/__init__.py
+
+
+	@./comicsite/comicsite/urls.py
+
+1 from 
+	~django.conf.urls
+ import 
+patterns
+ , 
+include
+ , 
+url
+
+3 from 
+	~django.contrib
+ import 
+admin
+
+4 
+admin
+ . 
+	`autodiscover
+ ( )
+
+6 
+	=urlpatterns
+ = 
+	`patterns
+ ( '' ,
+
+11 
+	`url
+ ( r'^admin/' , 
+	`include
+ ( 
+admin
+ . 
+site
+ . 
+urls
+ ) ) ,
+
+
+	@./comicsite/comicsite/wsgi.py
+
+10 import 
+	~os
+
+11 
+os
+ . 
+environ
+ . 
+	`setdefault
+ ( "DJANGO_SETTINGS_MODULE" , "comicsite.settings" )
+
+13 from 
+	~django.core.wsgi
+ import 
+get_wsgi_application
+
+14 
+	=application
+ = 
+	`get_wsgi_application
+ ( )
+
+
+	@./comicsite/comicsite/settings.py
+
+12 import 
+	~os
+
+13 
+	=BASE_DIR
+ = 
+os
+ . 
+path
+ . 
+	`dirname
+ ( 
+os
+ . 
+path
+ . 
+	`dirname
+ ( 
+__file__
+ ) )
+
+20 
+	=SECRET_KEY
+ = 'kjh*9%=s(tun2pf%$0n2_z(66j1q)#5@918lgu@@r*maf7+@ha'
+
+23 
+	=DEBUG
+ = True
+
+25 
+	=TEMPLATE_DEBUG
+ = True
+
+27 
+	=ALLOWED_HOSTS
+ = [ ]
+
+32 
+	=INSTALLED_APPS
+ = ( 'django.contrib.admin'
+
+41 
+	=MIDDLEWARE_CLASSES
+ = ( 'django.contrib.sessions.middleware.SessionMiddleware'
+
+50 
+	=ROOT_URLCONF
+ = 'comicsite.urls'
+
+52 
+	=WSGI_APPLICATION
+ = 'comicsite.wsgi.application'
+
+58 
+	=DATABASES
+ = { 'default'
+
+61 : 
+os
+ . 
+path
+ . 
+	`join
+ ( 
+BASE_DIR
+ , 'db.sqlite3' ) ,
+
+68 
+	=LANGUAGE_CODE
+ = 'en-us'
+
+70 
+	=TIME_ZONE
+ = 'UTC'
+
+72 
+	=USE_I18N
+ = True
+
+74 
+	=USE_L10N
+ = True
+
+76 
+	=USE_TZ
+ = True
+
+82 
+	=STATIC_URL
+ = '/static/'
+
+
+	@./comicsite/comicLibrary/admin.py
+
+1 from 
+	~django.contrib
+ import 
+admin
+
+
+	@./comicsite/comicLibrary/tests.py
+
+1 from 
+	~django.test
+ import 
+TestCase
+
+
+	@./comicsite/comicLibrary/views.py
+
+1 from 
+	~django.shortcuts
+ import 
+render
+
+
+	@./comicsite/comicLibrary/models.py
+
+1 from 
+	~django.db
+ import 
+models
+
+4 class 
+	cComic
+ ( 
+models
+ . 
+Model
+ ) :
+
+5 
+	=series
+ = 
+models
+ . 
+	`CharField
+ ( 
+max_length
+ = 200 )
+
+6 
+	=issue_number
+ = 
+models
+ . 
+	`IntegerField
+ ( )
+
+
+	@./comicsite/comicLibrary/__init__.py
+
+
+	@
+1
+.
+0
+10
+324
+./comicsite/manage.py
+./comicsite/comicsite/__init__.py
+./comicsite/comicsite/urls.py
+./comicsite/comicsite/wsgi.py
+./comicsite/comicsite/settings.py
+./comicsite/comicLibrary/admin.py
+./comicsite/comicLibrary/tests.py
+./comicsite/comicLibrary/views.py
+./comicsite/comicLibrary/models.py
+./comicsite/comicLibrary/__init__.py
