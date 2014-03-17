@@ -1,9 +1,15 @@
 from django.db import models
+from django.contrib import admin
 
 # Create your models here.
-class Comic(models.Model):
+class ComicSeries(models.Model):
     series = models.CharField(max_length=200)
-    issue_number = models.IntegerField()
-    archive_location = models.FilePathField(path=None)
-    # If the path for the cached location is not None it means we have it in the cache
-    cached_location = models.FilePathField(path=None)
+    def __str__(self):
+        return self.series
+
+class Comic(models.Model):
+    series = models.ForeignKey(ComicSeries)
+    issue = models.IntegerField()
+    archive = models.FileField(upload_to="comics/")
+    
+admin.site.register(ComicSeries)
