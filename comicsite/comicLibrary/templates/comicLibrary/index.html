@@ -1,0 +1,9 @@
+{% if serieses %}
+    <ul>
+    {% for s in serieses %}
+        <li><a href="/comicLibrary/{{ s.id }}/">{{ s.series }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No comics are available.</p>
+{% endif %}

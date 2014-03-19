@@ -11,5 +11,8 @@ class Comic(models.Model):
     series = models.ForeignKey(ComicSeries)
     issue = models.IntegerField()
     archive = models.FileField(upload_to="comics/")
+    def __str__(self):
+        return u"{0} #{1}".format(self.series, self.issue)
     
 admin.site.register(ComicSeries)
+admin.site.register(Comic)
