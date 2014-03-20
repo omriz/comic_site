@@ -1,1 +1,10 @@
 {{ series }}
+{% if series %}
+    <ul>
+    {% for comic in comics %}
+      <li><a href="media/{{ comic.pk }}">{{ comic }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No series available.</p>
+{% endif %}
