@@ -2,7 +2,7 @@
 {% if series %}
     <ul>
     {% for comic in comics %}
-      <li><a href="media/{{ comic.pk }}">{{ comic }}</a></li>
+      <li><a href="{% url 'comic_viewer' comic.id %}">{{ comic }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
