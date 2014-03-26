@@ -2,14 +2,13 @@ import threading
 import shutil
 import os
 import re
-from comicsite.settings import MEDIA_ROOT
+from comicsite.settings import MEDIA_ROOT, COMIC_TEMP_FOLDER
 from comicLibrary.archive import Extractor
 #global lock for the comic_cache index
 library_cache_lock = None
 # Cache list
 CACHE_SIZE = 10
 comic_cache = None
-TEMP_FOLDER = '/tmp/django_comic_cache/'
 
 class ComicCacheEntry(object):
     def __init__(self,comic):
@@ -20,7 +19,7 @@ class ComicCacheEntry(object):
         # at this point we have all the pages in the pages_list sorted
 
     def create_temp_dir(self, comic_name):
-        dir_name = TEMP_FOLDER+comic_name
+        dir_name = COMIC_TEMP_FOLDER+comic_name
         os.makedirs(dir_name, exist_ok=True)
         return dir_name
 
@@ -34,7 +33,8 @@ class ComicCacheEntry(object):
 
     def get_page(self, page_num):
         try:
-            return os.path.join(self.dir_name,self.pages_list[page_num-1])
+            #This is proportional to the static directory
+            return os.path.join(self.comic_name,self.pages_list[page_num-1])
         except IndexError:
             return None
 

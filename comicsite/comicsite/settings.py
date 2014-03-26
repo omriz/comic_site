@@ -81,6 +81,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+COMIC_TEMP_FOLDER = '/tmp/django_comic_cache/'
+STATICFILES_DIRS = (
+    COMIC_TEMP_FOLDER,
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = 'media/'

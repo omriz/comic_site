@@ -1,0 +1,4 @@
+<ul>
+    {% load staticfiles %}
+    <a href="{% url 'comic_viewer' comic.id page_num %}"><img src="{% static page_image %}" /></a>
+</ul>
