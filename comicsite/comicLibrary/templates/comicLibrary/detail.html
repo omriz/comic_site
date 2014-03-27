@@ -1,4 +1,8 @@
-{{ series }}
+<a href="{% url 'index' %}">Back To Library</a>
+<br>
+<header>
+<h1>{{ series }}</h1>
+</header>
 {% if series %}
     <ul>
     {% for comic in comics %}

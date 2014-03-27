@@ -1,4 +1,12 @@
 <ul>
+    {% if previous_page > 0 %}
+        <a href="{% url 'comic_viewer' comic.id previous_page %}">previous</a>
+        &nbsp;
+    {% endif %}
+        <a href="/comicLibrary/{{ comic.series.id }}/">Series Index</a>
+        &nbsp;
+        <a href="{% url 'comic_viewer' comic.id next_page %}">next</a>
+    <br>
     {% load staticfiles %}
-    <a href="{% url 'comic_viewer' comic.id page_num %}"><img src="{% static page_image %}" /></a>
+    <a href="{% url 'comic_viewer' comic.id next_page %}"><img src="{% static page_image %}" /></a>
 </ul>

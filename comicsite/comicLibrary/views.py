@@ -21,7 +21,7 @@ def detail(request, series_id):
     comics = s.comic_set.all()
     return render(request, 'comicLibrary/detail.html', {'series': s, 'comics': comics})
 
-#This will need to be modified to display mode
+#Deprecated view - we now use the comic_viewer
 @login_required(login_url="/login")
 def comic_download(request, comic_id):
     try:
@@ -40,13 +40,11 @@ def comic_viewer(request, comic_id, page_num=1):
     page_num_int = int(page_num)
     comic = get_object_or_404(Comic, pk=comic_id)
     page_image = get_comic_page(comic, page_num_int)
-    return render(request, 'comicLibrary/comic_viewer.html', {'comic':comic, 'page_num':page_num_int+1, 'page_image':page_image})
-    #wrapper = FileWrapper(open(page_image,"rb"))
-    #response = HttpResponse(wrapper)
-    #response['Content-Type'] = 'application/force-download'
-    #response['Content-Disposition'] = 'attachment; filename="%s"' % page_image.split("/")[-1]
-    #response['Content-Length'] = os.path.getsize(comic.archive.path)
-    #return response
+    if page_image:
+        return render(request, 'comicLibrary/comic_viewer.html', {'comic':comic, 'next_page':page_num_int+1, 'previous_page':page_num_int-1, 'page_image':page_image})
+    else:
+        return detail(request, comic.series.pk)
+
 
 def logout_page(request):
     logout(request)

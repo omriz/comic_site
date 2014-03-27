@@ -32,11 +32,11 @@ class ComicCacheEntry(object):
         alphanumeric_sort(self.pages_list)
 
     def get_page(self, page_num):
-        try:
+        if page_num > len(self.pages_list) :
+            return None
+        else:
             #This is proportional to the static directory
             return os.path.join(self.comic_name,self.pages_list[page_num-1])
-        except IndexError:
-            return None
 
 def alphanumeric_sort(filenames):
     """Do an in-place alphanumeric sort of the strings in <filenames>,
