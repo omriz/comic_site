@@ -10,6 +10,6 @@ urlpatterns = patterns('',
     url(r'^comicLibrary/', include('comicLibrary.urls')),
     url(r'^comicLibrary/\d+/media/(?P<comic_id>\d+)/(?P<page_num>\d+)/$',views.comic_viewer, name='comic_viewer'),
     url(r'^login/','django.contrib.auth.views.login'),
-    url(r'logout/',views.logout, name='logout'),
+    url(r'logout/',views.logout_page, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
 )
