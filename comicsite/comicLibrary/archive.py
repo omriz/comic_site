@@ -62,6 +62,8 @@ class Extractor:
                     return None
             proc = process.Process([_rar_exec, 'vb', '--', src])
             fd = proc.spawn()
+            print(fd)
+            print(dir(fd))
             self._files = [name.rstrip(os.linesep) for name in fd.readlines()]
             fd.close()
             proc.wait()
@@ -135,7 +137,7 @@ class Extractor:
             self._tfile.close()
 
     def wait(self):
-        if self._extract_thread != None:
+        if self._extract_thread is not None:
             self._extract_thread.join()
 
     def _thread_extract(self):
@@ -282,6 +284,7 @@ def archive_mime_type(path):
                 return ZIP
             fd = open(path, 'rb')
             magic = fd.read(4)
+            print(magic)
             fd.close()
             if tarfile.is_tarfile(path) and os.path.getsize(path) > 0:
                 if magic.startswith('BZh'):
@@ -289,7 +292,7 @@ def archive_mime_type(path):
                 if magic.startswith('\037\213'):
                     return GZIP
                 return TAR
-            if magic == 'Rar!':
+            if magic == b'Rar!':
                 return RAR
     except Exception:
         print ('! Error while reading', path)

@@ -1,80 +1,5 @@
-cscope 15 /home/action/workspace/comic_site -c 0000002250
-	@./comicsite/manage.py
-
-2 import 
-	~os
-
-3 import 
-	~sys
-
-5 if 
-__name__
- == "__main__" :
-
-6 
-os
- . 
-environ
- . 
-	`setdefault
- ( "DJANGO_SETTINGS_MODULE" , "comicsite.settings" )
-
-8 from 
-	~django.core.management
- import 
-execute_from_command_line
-
-10 
-	`execute_from_command_line
- ( 
-sys
- . 
-argv
- )
-
-
+cscope 15 /data/omriz/Workspace/comic_site -c 0000018919
 	@./comicsite/comicsite/__init__.py
-
-
-	@./comicsite/comicsite/urls.py
-
-1 from 
-	~django.conf.urls
- import 
-patterns
- , 
-include
- , 
-url
-
-3 from 
-	~django.contrib
- import 
-admin
-
-4 
-admin
- . 
-	`autodiscover
- ( )
-
-6 
-	=urlpatterns
- = 
-	`patterns
- ( '' ,
-
-11 
-	`url
- ( r'^admin/' , 
-	`include
- ( 
-admin
- . 
-site
- . 
-urls
- ) ) ,
 
 
 	@./comicsite/comicsite/wsgi.py
@@ -145,23 +70,23 @@ __file__
 	=INSTALLED_APPS
  = ( 'django.contrib.admin'
 
-41 
+42 
 	=MIDDLEWARE_CLASSES
  = ( 'django.contrib.sessions.middleware.SessionMiddleware'
 
-50 
+51 
 	=ROOT_URLCONF
  = 'comicsite.urls'
 
-52 
+53 
 	=WSGI_APPLICATION
  = 'comicsite.wsgi.application'
 
-58 
+59 
 	=DATABASES
  = { 'default'
 
-61 : 
+62 : 
 os
  . 
 path
@@ -171,29 +96,277 @@ path
 BASE_DIR
  , 'db.sqlite3' ) ,
 
-68 
+69 
 	=LANGUAGE_CODE
  = 'en-us'
 
-70 
+71 
 	=TIME_ZONE
  = 'UTC'
 
-72 
+73 
 	=USE_I18N
  = True
 
-74 
+75 
 	=USE_L10N
  = True
 
-76 
+77 
 	=USE_TZ
  = True
 
-82 
+83 
 	=STATIC_URL
  = '/static/'
+
+84 
+	=COMIC_TEMP_FOLDER
+ = '/tmp/django_comic_cache/'
+
+85 
+	=STATICFILES_DIRS
+ = (
+
+86 
+COMIC_TEMP_FOLDER
+ ,
+
+89 
+	=MEDIA_ROOT
+ = 
+os
+ . 
+path
+ . 
+	`join
+ ( 
+BASE_DIR
+ , "media" )
+
+90 
+	=MEDIA_URL
+ = 'media/'
+
+
+	@./comicsite/comicsite/urls.py
+
+1 from 
+	~django.conf.urls
+ import 
+patterns
+ , 
+include
+ , 
+url
+
+2 from 
+	~django.contrib
+ import 
+admin
+
+3 from 
+	~comicLibrary
+ import 
+views
+
+4 
+admin
+ . 
+	`autodiscover
+ ( )
+
+6 
+	=urlpatterns
+ = 
+	`patterns
+ ( '' ,
+
+10 
+	`url
+ ( r'^comicLibrary/' , 
+	`include
+ ( 'comicLibrary.urls' ) ) ,
+
+11 
+	`url
+ ( r'^comicLibrary/\d+/media/(?P<comic_id>\d+)/(?P<page_num>\d+)/$' , 
+views
+ . 
+comic_viewer
+ , 
+name
+ = 'comic_viewer' ) ,
+
+12 
+	`url
+ ( r'^login/' , 'django.contrib.auth.views.login' ) ,
+
+13 
+	`url
+ ( r'logout/' , 
+views
+ . 
+logout
+ , 
+name
+ = 'logout' ) ,
+
+14 
+	`url
+ ( r'^admin/' , 
+	`include
+ ( 
+admin
+ . 
+site
+ . 
+urls
+ ) ) ,
+
+
+	@./comicsite/manage.py
+
+2 import 
+	~os
+
+3 import 
+	~sys
+
+5 if 
+__name__
+ == "__main__" :
+
+6 
+os
+ . 
+environ
+ . 
+	`setdefault
+ ( "DJANGO_SETTINGS_MODULE" , "comicsite.settings" )
+
+8 from 
+	~django.core.management
+ import 
+execute_from_command_line
+
+10 
+	`execute_from_command_line
+ ( 
+sys
+ . 
+argv
+ )
+
+
+	@./comicsite/file_updater.py
+
+2 import 
+	~os
+
+3 import 
+	~sys
+
+4 from 
+	~comicLibrary.models
+ import 
+Comic
+ , 
+ComicSeries
+
+6 def 
+	$create_series
+ ( 
+name
+ ) :
+
+7 
+	=new_series
+ = 
+	`ComicSeries
+ ( 
+series
+ = 
+name
+ )
+
+8 
+new_series
+ . 
+	`save
+ ( )
+
+9 return 
+new_series
+ 
+	}
+
+11 def 
+	$create_comic
+ ( 
+path
+ , 
+issue
+ , 
+series
+ ) :
+
+12 
+	=new_comic
+ = 
+	`Comic
+ ( 
+series
+ = 
+series
+ , 
+issue
+ = 
+issue
+ , 
+archive
+ = 
+path
+ )
+
+13 
+new_comic
+ . 
+	`save
+ ( )
+
+14 return 
+new_comic
+ 
+	}
+
+16 def 
+	$update_files
+ ( ) :
+
+17 pass 
+	}
+
+19 if 
+__name__
+ == "__main__" :
+
+20 
+os
+ . 
+environ
+ . 
+	`setdefault
+ ( "DJANGO_SETTINGS_MODULE" , "comicsite.settings" )
+
+21 from 
+	~django.core.management
+ import 
+execute_from_command_line
+
+22 
+	`update_files
+ ( )
 
 
 	@./comicsite/comicLibrary/admin.py
@@ -204,20 +377,1443 @@ BASE_DIR
 admin
 
 
-	@./comicsite/comicLibrary/tests.py
+	@./comicsite/comicLibrary/archive.py
 
-1 from 
-	~django.test
+4 import 
+	~sys
+
+5 import 
+	~os
+
+6 import 
+	~re
+
+7 import 
+	~zipfile
+
+8 import 
+	~tarfile
+
+9 import 
+	~threading
+
+10 from 
+	~comicLibrary
  import 
-TestCase
+process
 
+12 
+	=ZIP
+ , 
+	=RAR
+ , 
+	=TAR
+ , 
+	=GZIP
+ , 
+	=BZIP2
+ = 
+	`range
+ ( 5 )
 
-	@./comicsite/comicLibrary/views.py
+14 
+	=_rar_exec
+ = None
 
-1 from 
-	~django.shortcuts
- import 
-render
+17 class 
+	cExtractor
+ :
+
+33 def 
+	$__init__
+ ( 
+self
+ ) :
+
+34 
+self
+ . 
+	=_setupped
+ = False 
+	}
+
+36 def 
+	$setup
+ ( 
+self
+ , 
+src
+ , 
+dst
+ ) :
+
+41 
+self
+ . 
+	=_src
+ = 
+src
+
+42 
+self
+ . 
+	=_dst
+ = 
+dst
+
+43 
+self
+ . 
+	=_type
+ = 
+	`archive_mime_type
+ ( 
+src
+ )
+
+44 
+self
+ . 
+	=_files
+ = [ ]
+
+45 
+self
+ . 
+	=_extracted
+ = { }
+
+46 
+self
+ . 
+	=_stop
+ = False
+
+47 
+self
+ . 
+	=_extract_thread
+ = None
+
+48 
+self
+ . 
+	=_condition
+ = 
+threading
+ . 
+	`Condition
+ ( )
+
+50 if 
+self
+ . 
+_type
+ == 
+ZIP
+ :
+
+51 
+self
+ . 
+	=_zfile
+ = 
+zipfile
+ . 
+	`ZipFile
+ ( 
+src
+ , 'r' )
+
+52 
+self
+ . 
+	=_files
+ = 
+self
+ . 
+_zfile
+ . 
+	`namelist
+ ( )
+
+53 elif 
+self
+ . 
+_type
+ in ( 
+TAR
+ , 
+GZIP
+ , 
+BZIP2
+ ) :
+
+54 
+self
+ . 
+	=_tfile
+ = 
+tarfile
+ . 
+	`open
+ ( 
+src
+ , 'r' )
+
+55 
+self
+ . 
+	=_files
+ = 
+self
+ . 
+_tfile
+ . 
+	`getnames
+ ( )
+
+56 elif 
+self
+ . 
+_type
+ == 
+RAR
+ :
+
+57 global 
+	g_rar_exec
+
+58 if 
+_rar_exec
+ is None :
+
+59 
+	=_rar_exec
+ = 
+	`_get_rar_exec
+ ( )
+
+60 if 
+_rar_exec
+ is None :
+
+61 
+	`print
+ ( '! Could not find RAR file extractor.' )
+
+63 
+	=proc
+ = 
+process
+ . 
+	`Process
+ ( [ 
+_rar_exec
+ , 'vb' , '--' , 
+src
+ ] )
+
+64 
+	=fd
+ = 
+proc
+ . 
+	`spawn
+ ( )
+
+65 
+self
+ . 
+	=_files
+ = [ 
+name
+ . 
+	`rstrip
+ ( 
+os
+ . 
+linesep
+ ) for 
+name
+ in 
+fd
+ . 
+	`readlines
+ ( ) ]
+
+66 
+fd
+ . 
+	`close
+ ( )
+
+67 
+proc
+ . 
+	`wait
+ ( )
+
+69 
+	`print
+ ( '! Non-supported archive format:' , 
+src
+ )
+
+72 
+self
+ . 
+	=_setupped
+ = True
+
+73 return 
+self
+ . 
+_condition
+ 
+	}
+
+75 def 
+	$get_files
+ ( 
+self
+ ) :
+
+81 return 
+self
+ . 
+_files
+ [ : ] 
+	}
+
+83 def 
+	$set_files
+ ( 
+self
+ , 
+files
+ ) :
+
+95 if 
+self
+ . 
+_type
+ in ( 
+GZIP
+ , 
+BZIP2
+ ) :
+
+96 
+self
+ . 
+	=_files
+ = [ 
+x
+ for 
+x
+ in 
+self
+ . 
+_files
+ if 
+x
+ in 
+files
+ ]
+
+98 
+self
+ . 
+	=_files
+ = 
+files
+ 
+	}
+
+100 def 
+	$is_ready
+ ( 
+self
+ , 
+name
+ ) :
+
+104 return 
+self
+ . 
+_extracted
+ . 
+	`get
+ ( 
+name
+ , False ) 
+	}
+
+106 def 
+	$get_mime_type
+ ( 
+self
+ ) :
+
+108 return 
+self
+ . 
+_type
+ 
+	}
+
+110 def 
+	$stop
+ ( 
+self
+ ) :
+
+114 
+self
+ . 
+	=_stop
+ = True
+
+115 if 
+self
+ . 
+_setupped
+ :
+
+116 
+self
+ . 
+_extract_thread
+ . 
+	`join
+ ( )
+
+117 
+self
+ . 
+	=setupped
+ = False 
+	}
+
+119 def 
+	$extract
+ ( 
+self
+ ) :
+
+124 
+self
+ . 
+	=_extract_thread
+ = 
+threading
+ . 
+	`Thread
+ ( 
+target
+ = 
+self
+ . 
+_thread_extract
+ )
+
+125 
+self
+ . 
+_extract_thread
+ . 
+	`setDaemon
+ ( False )
+
+126 
+self
+ . 
+_extract_thread
+ . 
+	`start
+ ( ) 
+	}
+
+128 def 
+	$close
+ ( 
+self
+ ) :
+
+132 if 
+self
+ . 
+_type
+ == 
+ZIP
+ :
+
+133 
+self
+ . 
+_zfile
+ . 
+	`close
+ ( )
+
+134 elif 
+self
+ . 
+_type
+ in ( 
+TAR
+ , 
+GZIP
+ , 
+BZIP2
+ ) :
+
+135 
+self
+ . 
+_tfile
+ . 
+	`close
+ ( ) 
+	}
+
+137 def 
+	$wait
+ ( 
+self
+ ) :
+
+138 if 
+self
+ . 
+_extract_thread
+ != None :
+
+139 
+self
+ . 
+_extract_thread
+ . 
+	`join
+ ( ) 
+	}
+
+141 def 
+	$_thread_extract
+ ( 
+self
+ ) :
+
+143 for 
+name
+ in 
+self
+ . 
+_files
+ :
+
+144 
+self
+ . 
+	`_extract_file
+ ( 
+name
+ )
+
+145 
+self
+ . 
+	`close
+ ( ) 
+	}
+
+147 def 
+	$_extract_file
+ ( 
+self
+ , 
+name
+ ) :
+
+152 if 
+self
+ . 
+_stop
+ :
+
+153 
+self
+ . 
+	`close
+ ( )
+
+154 
+sys
+ . 
+	`exit
+ ( 0 )
+
+156 if 
+self
+ . 
+_type
+ == 
+ZIP
+ :
+
+157 
+	=dst_path
+ = 
+os
+ . 
+path
+ . 
+	`join
+ ( 
+self
+ . 
+_dst
+ , 
+name
+ )
+
+158 if not 
+os
+ . 
+path
+ . 
+	`exists
+ ( 
+os
+ . 
+path
+ . 
+	`dirname
+ ( 
+dst_path
+ ) ) :
+
+159 
+os
+ . 
+	`makedirs
+ ( 
+os
+ . 
+path
+ . 
+	`dirname
+ ( 
+dst_path
+ ) )
+
+160 
+	=new
+ = 
+	`open
+ ( 
+dst_path
+ , 'wb' )
+
+161 
+new
+ . 
+	`write
+ ( 
+self
+ . 
+_zfile
+ . 
+	`read
+ ( 
+name
+ ) )
+
+162 
+new
+ . 
+	`close
+ ( )
+
+163 elif 
+self
+ . 
+_type
+ in ( 
+TAR
+ , 
+GZIP
+ , 
+BZIP2
+ ) :
+
+164 if 
+os
+ . 
+path
+ . 
+	`normpath
+ ( 
+os
+ . 
+path
+ . 
+	`join
+ ( 
+self
+ . 
+_dst
+ , 
+name
+ ) ) . 
+	`startswith
+ (
+
+165 
+self
+ . 
+_dst
+ ) :
+
+166 
+self
+ . 
+_tfile
+ . 
+	`extract
+ ( 
+name
+ , 
+self
+ . 
+_dst
+ )
+
+168 
+	`print
+ ( '! Non-local tar member:' , 
+name
+ , '\n' )
+
+169 elif 
+self
+ . 
+_type
+ == 
+RAR
+ :
+
+170 if 
+_rar_exec
+ is not None :
+
+171 
+	=proc
+ = 
+process
+ . 
+	`Process
+ ( [ 
+_rar_exec
+ , 'x' , '-kb' , '-p-' , '-o-'
+
+172 , '-inul' , '--' , 
+self
+ . 
+_src
+ , 
+name
+ , 
+self
+ . 
+_dst
+ ] )
+
+173 
+proc
+ . 
+	`spawn
+ ( )
+
+174 
+proc
+ . 
+	`wait
+ ( )
+
+176 
+	`print
+ ( '! Could not find RAR file extractor.' )
+
+177 except 
+Exception
+ :
+
+183 
+self
+ . 
+_condition
+ . 
+	`acquire
+ ( )
+
+184 
+self
+ . 
+	=_extracted
+ [ 
+name
+ ] = True
+
+185 
+self
+ . 
+_condition
+ . 
+	`notify
+ ( )
+
+186 
+self
+ . 
+_condition
+ . 
+	`release
+ ( ) 
+	}
+
+189 class 
+	cPacker
+ :
+
+198 def 
+	$__init__
+ ( 
+self
+ , 
+image_files
+ , 
+other_files
+ , 
+archive_path
+ , 
+base_name
+ ) :
+
+211 
+self
+ . 
+	=_image_files
+ = 
+image_files
+
+212 
+self
+ . 
+	=_other_files
+ = 
+other_files
+
+213 
+self
+ . 
+	=_archive_path
+ = 
+archive_path
+
+214 
+self
+ . 
+	=_base_name
+ = 
+base_name
+
+215 
+self
+ . 
+	=_pack_thread
+ = None
+
+216 
+self
+ . 
+	=_packing_successful
+ = False 
+	}
+
+218 def 
+	$pack
+ ( 
+self
+ ) :
+
+220 
+self
+ . 
+	=_pack_thread
+ = 
+threading
+ . 
+	`Thread
+ ( 
+target
+ = 
+self
+ . 
+_thread_pack
+ )
+
+221 
+self
+ . 
+_pack_thread
+ . 
+	`setDaemon
+ ( False )
+
+222 
+self
+ . 
+_pack_thread
+ . 
+	`start
+ ( ) 
+	}
+
+224 def 
+	$wait
+ ( 
+self
+ ) :
+
+228 if 
+self
+ . 
+_pack_thread
+ != None :
+
+229 
+self
+ . 
+_pack_thread
+ . 
+	`join
+ ( )
+
+230 return 
+self
+ . 
+_packing_successful
+ 
+	}
+
+232 def 
+	$_thread_pack
+ ( 
+self
+ ) :
+
+234 
+	=zfile
+ = 
+zipfile
+ . 
+	`ZipFile
+ ( 
+self
+ . 
+_archive_path
+ , 'w' )
+
+235 except 
+Exception
+ :
+
+236 
+	`print
+ ( '! Could not create archive' , 
+self
+ . 
+_archive_path
+ )
+
+238 
+	=used_names
+ = [ ]
+
+239 
+	=pattern
+ = '%%0%dd - %s%%s' % ( 
+	`len
+ ( 
+	`str
+ ( 
+	`len
+ ( 
+self
+ . 
+_image_files
+ ) ) ) ,
+
+240 
+self
+ . 
+_base_name
+ )
+
+241 for 
+i
+ , 
+path
+ in 
+	`enumerate
+ ( 
+self
+ . 
+_image_files
+ ) :
+
+242 
+	=filename
+ = 
+pattern
+ % ( 
+i
+ + 1 , 
+os
+ . 
+path
+ . 
+	`splitext
+ ( 
+path
+ ) [ 1 ] )
+
+244 
+zfile
+ . 
+	`write
+ ( 
+path
+ , 
+filename
+ , 
+zipfile
+ . 
+ZIP_STORED
+ )
+
+245 except 
+Exception
+ :
+
+246 
+	`print
+ ( '! Could not add file %s to add to %s, aborting...' % (
+
+247 
+path
+ , 
+self
+ . 
+_archive_path
+ ) )
+
+248 
+zfile
+ . 
+	`close
+ ( )
+
+250 
+os
+ . 
+	`remove
+ ( 
+self
+ . 
+_archive_path
+ )
+
+254 
+used_names
+ . 
+	`append
+ ( 
+filename
+ )
+
+255 for 
+path
+ in 
+self
+ . 
+_other_files
+ :
+
+256 
+	=filename
+ = 
+os
+ . 
+path
+ . 
+	`basename
+ ( 
+path
+ )
+
+257 while 
+filename
+ in 
+used_names
+ :
+
+258 
+	=filename
+ = '_%s' % 
+filename
+
+260 
+zfile
+ . 
+	`write
+ ( 
+path
+ , 
+filename
+ , 
+zipfile
+ . 
+ZIP_DEFLATED
+ )
+
+261 except 
+Exception
+ :
+
+262 
+	`print
+ ( '! Could not add file %s to add to %s, aborting...' % (
+
+263 
+path
+ , 
+self
+ . 
+_archive_path
+ ) )
+
+264 
+zfile
+ . 
+	`close
+ ( )
+
+266 
+os
+ . 
+	`remove
+ ( 
+self
+ . 
+_archive_path
+ )
+
+270 
+used_names
+ . 
+	`append
+ ( 
+filename
+ )
+
+271 
+zfile
+ . 
+	`close
+ ( )
+
+272 
+self
+ . 
+	=_packing_successful
+ = True 
+	}
+
+275 def 
+	$archive_mime_type
+ ( 
+path
+ ) :
+
+278 if 
+os
+ . 
+path
+ . 
+	`isfile
+ ( 
+path
+ ) :
+
+279 if not 
+os
+ . 
+	`access
+ ( 
+path
+ , 
+os
+ . 
+R_OK
+ ) :
+
+281 if 
+zipfile
+ . 
+	`is_zipfile
+ ( 
+path
+ ) :
+
+282 return 
+ZIP
+
+283 
+	=fd
+ = 
+	`open
+ ( 
+path
+ , 'rb' )
+
+284 
+	=magic
+ = 
+fd
+ . 
+	`read
+ ( 4 )
+
+285 
+fd
+ . 
+	`close
+ ( )
+
+286 if 
+tarfile
+ . 
+	`is_tarfile
+ ( 
+path
+ ) and 
+os
+ . 
+path
+ . 
+	`getsize
+ ( 
+path
+ ) > 0 :
+
+287 if 
+magic
+ . 
+	`startswith
+ ( 'BZh' ) :
+
+288 return 
+BZIP2
+
+289 if 
+magic
+ . 
+	`startswith
+ ( '\037\213' ) :
+
+290 return 
+GZIP
+
+291 return 
+TAR
+
+292 if 
+magic
+ == 'Rar!' :
+
+293 return 
+RAR
+
+294 except 
+Exception
+ :
+
+295 
+	`print
+ ( '! Error while reading' , 
+path
+ )
+
+296 return None 
+	}
+
+299 def 
+	$get_name
+ ( 
+archive_type
+ ) :
+
+301 return { 
+ZIP
+ : 
+	`_
+ ( 'ZIP archive' ) ,
+
+302 
+TAR
+ : 
+	`_
+ ( 'Tar archive' ) ,
+
+303 
+GZIP
+ : 
+	`_
+ ( 'Gzip compressed tar archive' ) ,
+
+304 
+BZIP2
+ : 
+	`_
+ ( 'Bzip2 compressed tar archive' ) ,
+
+305 
+RAR
+ : 
+	`_
+ ( 'RAR archive' ) } [ 
+archive_type
+ ] 
+	}
+
+308 def 
+	$get_archive_info
+ ( 
+path
+ ) :
+
+312 
+	=image_re
+ = 
+re
+ . 
+	`compile
+ ( r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$' , 
+re
+ . 
+I
+ )
+
+313 
+	=extractor
+ = 
+	`Extractor
+ ( )
+
+314 
+extractor
+ . 
+	`setup
+ ( 
+path
+ , None )
+
+315 
+	=mime
+ = 
+extractor
+ . 
+	`get_mime_type
+ ( )
+
+316 if 
+mime
+ is None :
+
+318 
+	=files
+ = 
+extractor
+ . 
+	`get_files
+ ( )
+
+319 
+extractor
+ . 
+	`close
+ ( )
+
+320 
+	=num_pages
+ = 
+	`len
+ ( 
+	`filter
+ ( 
+image_re
+ . 
+search
+ , 
+files
+ ) )
+
+321 
+	=size
+ = 
+os
+ . 
+	`stat
+ ( 
+path
+ ) . 
+st_size
+
+322 return ( 
+mime
+ , 
+num_pages
+ , 
+size
+ ) 
+	}
+
+325 def 
+	$_get_rar_exec
+ ( ) :
+
+329 for 
+command
+ in ( 'unrar' , 'rar' ) :
+
+330 if 
+process
+ . 
+	`Process
+ ( [ 
+command
+ ] ) . 
+	`spawn
+ ( ) is not None :
+
+331 return 
+command
+
+332 return None 
+	}
 
 
 	@./comicsite/comicLibrary/models.py
@@ -227,15 +1823,20 @@ render
  import 
 models
 
-4 class 
-	cComic
+2 from 
+	~django.contrib
+ import 
+admin
+
+5 class 
+	cComicSeries
  ( 
 models
  . 
 Model
  ) :
 
-5 
+6 
 	=series
  = 
 models
@@ -245,31 +1846,1059 @@ models
 max_length
  = 200 )
 
-6 
-	=issue_number
+7 def 
+	$__str__
+ ( 
+self
+ ) :
+
+8 return 
+self
+ . 
+series
+ 
+	}
+
+10 class 
+	cComic
+ ( 
+models
+ . 
+Model
+ ) :
+
+11 
+	=series
+ = 
+models
+ . 
+	`ForeignKey
+ ( 
+ComicSeries
+ )
+
+12 
+	=issue
  = 
 models
  . 
 	`IntegerField
  ( )
 
+13 
+	=archive
+ = 
+models
+ . 
+	`FileField
+ ( 
+upload_to
+ = "comics/" )
+
+14 def 
+	$__str__
+ ( 
+self
+ ) :
+
+15 return u"{0} #{1}" . 
+	`format
+ ( 
+self
+ . 
+series
+ , 
+self
+ . 
+issue
+ ) 
+	}
+
+16 def 
+	$extract_comic
+ ( 
+self
+ ) :
+
+17 pass 
+	}
+
+20 
+admin
+ . 
+site
+ . 
+	`register
+ ( 
+ComicSeries
+ )
+
+21 
+admin
+ . 
+site
+ . 
+	`register
+ ( 
+Comic
+ )
+
 
 	@./comicsite/comicLibrary/__init__.py
+
+
+	@./comicsite/comicLibrary/process.py
+
+4 import 
+	~gc
+
+5 import 
+	~subprocess
+
+8 class 
+	cProcess
+ :
+
+19 def 
+	$__init__
+ ( 
+self
+ , 
+args
+ ) :
+
+23 
+self
+ . 
+	=_args
+ = 
+args
+
+24 
+self
+ . 
+	=_proc
+ = None 
+	}
+
+26 def 
+	$_exec
+ ( 
+self
+ ) :
+
+31 
+self
+ . 
+	=_proc
+ = 
+subprocess
+ . 
+	`Popen
+ ( 
+self
+ . 
+_args
+ , 
+stdout
+ = 
+subprocess
+ . 
+PIPE
+ )
+
+32 return 
+self
+ . 
+_proc
+ . 
+stdout
+
+33 except 
+Exception
+ :
+
+34 return None 
+	}
+
+36 def 
+	$spawn
+ ( 
+self
+ ) :
+
+41 
+gc
+ . 
+	`disable
+ ( )
+
+42 return 
+self
+ . 
+	`_exec
+ ( )
+
+44 
+gc
+ . 
+	`enable
+ ( ) 
+	}
+
+46 def 
+	$wait
+ ( 
+self
+ ) :
+
+48 if 
+self
+ . 
+_proc
+ is None :
+
+49 raise 
+	`Exception
+ ( 'Process not spawned.' )
+
+50 return 
+self
+ . 
+_proc
+ . 
+	`wait
+ ( ) 
+	}
+
+
+	@./comicsite/comicLibrary/library_helpers.py
+
+1 import 
+	~threading
+
+2 import 
+	~shutil
+
+3 import 
+	~os
+
+4 import 
+	~re
+
+5 from 
+	~comicsite.settings
+ import 
+MEDIA_ROOT
+ , 
+COMIC_TEMP_FOLDER
+
+6 from 
+	~comicLibrary.archive
+ import 
+Extractor
+
+8 
+	=library_cache_lock
+ = None
+
+10 
+	=CACHE_SIZE
+ = 10
+
+11 
+	=comic_cache
+ = None
+
+13 class 
+	cComicCacheEntry
+ ( 
+object
+ ) :
+
+14 def 
+	$__init__
+ ( 
+self
+ , 
+comic
+ ) :
+
+15 
+self
+ . 
+	=pages_list
+ = 
+	`list
+ ( )
+
+16 
+self
+ . 
+	=comic_name
+ = 
+comic
+ . 
+archive
+ . 
+name
+
+17 
+self
+ . 
+	=dir_name
+ = 
+self
+ . 
+	`create_temp_dir
+ ( 
+self
+ . 
+comic_name
+ )
+
+18 
+self
+ . 
+	`extract_comic
+ ( 
+comic
+ . 
+archive
+ . 
+file
+ . 
+name
+ ) 
+	}
+
+21 def 
+	$create_temp_dir
+ ( 
+self
+ , 
+comic_name
+ ) :
+
+22 
+	=dir_name
+ = 
+COMIC_TEMP_FOLDER
+ + 
+comic_name
+
+23 
+os
+ . 
+	`makedirs
+ ( 
+dir_name
+ , 
+exist_ok
+ = True )
+
+24 return 
+dir_name
+ 
+	}
+
+26 def 
+	$extract_comic
+ ( 
+self
+ , 
+archive
+ ) :
+
+27 
+	=extractor
+ = 
+	`Extractor
+ ( )
+
+28 
+extractor
+ . 
+	`setup
+ ( 
+archive
+ , 
+self
+ . 
+dir_name
+ )
+
+29 
+extractor
+ . 
+	`extract
+ ( )
+
+30 
+extractor
+ . 
+	`wait
+ ( )
+
+31 
+self
+ . 
+	=pages_list
+ = [ 
+p
+ for 
+p
+ in 
+extractor
+ . 
+	`get_files
+ ( ) if 
+p
+ . 
+	`endswith
+ ( "jpg" ) ]
+
+32 
+	`alphanumeric_sort
+ ( 
+self
+ . 
+pages_list
+ ) 
+	}
+
+34 def 
+	$get_page
+ ( 
+self
+ , 
+page_num
+ ) :
+
+35 if 
+page_num
+ > 
+	`len
+ ( 
+self
+ . 
+pages_list
+ ) :
+
+39 return 
+os
+ . 
+path
+ . 
+	`join
+ ( 
+self
+ . 
+comic_name
+ , 
+self
+ . 
+pages_list
+ [ 
+page_num
+ - 1 ] ) 
+	}
+
+41 def 
+	$alphanumeric_sort
+ ( 
+filenames
+ ) :
+
+46 
+	=rec
+ = 
+re
+ . 
+	`compile
+ ( "\d+|\D+" )
+
+47 def 
+_format_substrings
+ ( 
+name
+ ) :
+
+48 
+	=strings
+ = 
+rec
+ . 
+	`findall
+ ( 
+name
+ )
+
+49 
+	=my_list
+ = 
+	`list
+ ( )
+
+50 for 
+s
+ in 
+strings
+ :
+
+51 if 
+s
+ . 
+	`isdigit
+ ( ) :
+
+52 
+my_list
+ . 
+	`append
+ ( 
+	`int
+ ( 
+s
+ ) )
+
+53 
+my_list
+ . 
+	`append
+ ( 
+s
+ . 
+	`lower
+ ( ) )
+
+54 return 
+my_list
+
+55 
+filenames
+ . 
+	`sort
+ ( 
+key
+ = 
+_format_substrings
+ ) 
+	}
+
+57 def 
+	$get_comic_page
+ ( 
+comic
+ , 
+page_num
+ ) :
+
+58 for 
+entry
+ in 
+comic_cache
+ :
+
+59 if 
+entry
+ . 
+comic_name
+ == 
+comic
+ . 
+archive
+ . 
+name
+ :
+
+60 return 
+entry
+ . 
+	`get_page
+ ( 
+page_num
+ )
+
+61 
+	=new_entry
+ = 
+	`ComicCacheEntry
+ ( 
+comic
+ )
+
+62 
+library_cache_lock
+ . 
+	`acquire
+ ( True )
+
+63 if 
+	`len
+ ( 
+comic_cache
+ ) >= 
+CACHE_SIZE
+ :
+
+64 
+	=old_entry
+ = 
+comic_cache
+ . 
+	`pop
+ ( 0 )
+
+66 
+	=old_entry
+ = None
+
+67 
+comic_cache
+ . 
+	`append
+ ( 
+new_entry
+ )
+
+68 
+library_cache_lock
+ . 
+	`release
+ ( )
+
+69 if 
+old_entry
+ :
+
+70 
+shutil
+ . 
+	`rmtree
+ ( 
+old_entry
+ . 
+dir_name
+ )
+
+71 return 
+new_entry
+ . 
+	`get_page
+ ( 
+page_num
+ ) 
+	}
+
+74 if not 
+library_cache_lock
+ :
+
+75 
+	=library_cache_lock
+ = 
+threading
+ . 
+	`Lock
+ ( )
+
+76 
+	=comic_cache
+ = 
+	`list
+ ( )
+
+
+	@./comicsite/comicLibrary/views.py
+
+1 from 
+	~django.shortcuts
+ import 
+render
+ , 
+get_object_or_404
+
+2 from 
+	~django.http
+ import 
+HttpResponse
+ , 
+Http404
+ , 
+HttpResponseRedirect
+
+3 from 
+	~django.core.servers.basehttp
+ import 
+FileWrapper
+
+4 from 
+	~django.contrib.auth
+ import 
+logout
+
+5 from 
+	~django.contrib.auth.decorators
+ import 
+login_required
+
+6 from 
+	~comicLibrary.models
+ import 
+ComicSeries
+ , 
+Comic
+
+7 from 
+	~comicLibrary.library_helpers
+ import 
+get_comic_page
+
+8 import 
+	~os
+
+9 import 
+	~mimetypes
+
+12 @ 
+	`login_required
+ ( 
+login_url
+ = "/login" )
+
+13 def 
+	$index
+ ( 
+request
+ ) :
+
+14 
+	=serieses
+ = 
+ComicSeries
+ . 
+objects
+ . 
+	`all
+ ( )
+
+15 
+	=context
+ = { "serieses" : 
+serieses
+ }
+
+16 return 
+	`render
+ ( 
+request
+ , "comicLibrary/index.html" , 
+context
+ ) 
+	}
+
+18 @ 
+	`login_required
+ ( 
+login_url
+ = "/login" )
+
+19 def 
+	$detail
+ ( 
+request
+ , 
+series_id
+ ) :
+
+20 
+	=s
+ = 
+	`get_object_or_404
+ ( 
+ComicSeries
+ , 
+pk
+ = 
+series_id
+ )
+
+21 
+	=comics
+ = 
+s
+ . 
+comic_set
+ . 
+	`all
+ ( )
+
+22 return 
+	`render
+ ( 
+request
+ , 'comicLibrary/detail.html' , { 'series' : 
+s
+ , 'comics' : 
+comics
+ } ) 
+	}
+
+25 @ 
+	`login_required
+ ( 
+login_url
+ = "/login" )
+
+26 def 
+	$comic_download
+ ( 
+request
+ , 
+comic_id
+ ) :
+
+28 
+	=comic
+ = 
+Comic
+ . 
+objects
+ . 
+	`get
+ ( 
+pk
+ = 
+comic_id
+ )
+
+29 except 
+Comic
+ . 
+DoesNotExist
+ :
+
+30 raise 
+Http404
+
+31 
+	=wrapper
+ = 
+	`FileWrapper
+ ( 
+comic
+ . 
+archive
+ )
+
+32 
+	=response
+ = 
+	`HttpResponse
+ ( 
+wrapper
+ )
+
+33 
+	=response
+ [ 'Content-Type' ] = 'application/force-download'
+
+34 
+	=response
+ [ 'Content-Disposition' ] = 'attachment; filename="%s"' % 
+comic
+ . 
+archive
+ . 
+path
+ . 
+	`split
+ ( "/" ) [ - 1 ]
+
+35 
+	=response
+ [ 'Content-Length' ] = 
+os
+ . 
+path
+ . 
+	`getsize
+ ( 
+comic
+ . 
+archive
+ . 
+path
+ )
+
+36 return 
+response
+ 
+	}
+
+38 @ 
+	`login_required
+ ( 
+login_url
+ = "/login" )
+
+39 def 
+	$comic_viewer
+ ( 
+request
+ , 
+comic_id
+ , 
+page_num
+ = 1 ) :
+
+40 
+	=page_num_int
+ = 
+	`int
+ ( 
+page_num
+ )
+
+41 
+	=comic
+ = 
+	`get_object_or_404
+ ( 
+Comic
+ , 
+pk
+ = 
+comic_id
+ )
+
+42 
+	=page_image
+ = 
+	`get_comic_page
+ ( 
+comic
+ , 
+page_num_int
+ )
+
+43 if 
+page_image
+ :
+
+44 return 
+	`render
+ ( 
+request
+ , 'comicLibrary/comic_viewer.html' , { 'comic' : 
+comic
+ , 'next_page' : 
+page_num_int
+ + 1 , 'previous_page' : 
+page_num_int
+ - 1 , 'page_image' : 
+page_image
+ } )
+
+46 return 
+	`detail
+ ( 
+request
+ , 
+comic
+ . 
+series
+ . 
+pk
+ ) 
+	}
+
+49 def 
+	$logout_page
+ ( 
+request
+ ) :
+
+50 
+	`logout
+ ( 
+request
+ )
+
+51 return 
+	`HttpResponseRedirect
+ ( "/login" ) 
+	}
+
+
+	@./comicsite/comicLibrary/tests.py
+
+1 from 
+	~django.test
+ import 
+TestCase
+
+
+	@./comicsite/comicLibrary/urls.py
+
+1 from 
+	~django.conf.urls
+ import 
+patterns
+ , 
+url
+
+3 from 
+	~comicLibrary
+ import 
+views
+
+5 
+	=urlpatterns
+ = 
+	`patterns
+ ( '' ,
+
+6 
+	`url
+ ( r'^$' , 
+views
+ . 
+index
+ , 
+name
+ = 'index' ) ,
+
+7 
+	`url
+ ( r'^(?P<series_id>\d+)/$' , 
+views
+ . 
+detail
+ , 
+name
+ = 'detail' ) ,
 
 
 	@
 1
 .
 0
-10
-324
-./comicsite/manage.py
+15
+501
 ./comicsite/comicsite/__init__.py
-./comicsite/comicsite/urls.py
 ./comicsite/comicsite/wsgi.py
 ./comicsite/comicsite/settings.py
+./comicsite/comicsite/urls.py
+./comicsite/manage.py
+./comicsite/file_updater.py
 ./comicsite/comicLibrary/admin.py
-./comicsite/comicLibrary/tests.py
-./comicsite/comicLibrary/views.py
+./comicsite/comicLibrary/archive.py
 ./comicsite/comicLibrary/models.py
 ./comicsite/comicLibrary/__init__.py
+./comicsite/comicLibrary/process.py
+./comicsite/comicLibrary/library_helpers.py
+./comicsite/comicLibrary/views.py
+./comicsite/comicLibrary/tests.py
+./comicsite/comicLibrary/urls.py

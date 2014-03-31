@@ -1,0 +1,138 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ALLOWED_HOSTS	comicsite/comicsite/settings.py	/^ALLOWED_HOSTS = []$/;"	v
+BASE_DIR	comicsite/comicsite/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(__file__))$/;"	v
+CACHE_SIZE	comicsite/comicLibrary/library_helpers.py	/^CACHE_SIZE = 10$/;"	v
+COMIC_TEMP_FOLDER	comicsite/comicLibrary/library_helpers.py	/^from comicsite.settings import MEDIA_ROOT, COMIC_TEMP_FOLDER$/;"	i
+COMIC_TEMP_FOLDER	comicsite/comicsite/settings.py	/^COMIC_TEMP_FOLDER = '\/tmp\/django_comic_cache\/'$/;"	v
+Comic	comicsite/comicLibrary/models.py	/^class Comic(models.Model):$/;"	c
+Comic	comicsite/comicLibrary/views.py	/^from comicLibrary.models import ComicSeries, Comic$/;"	i
+Comic	comicsite/file_updater.py	/^from comicLibrary.models import Comic, ComicSeries$/;"	i
+ComicCacheEntry	comicsite/comicLibrary/library_helpers.py	/^class ComicCacheEntry(object):$/;"	c
+ComicSeries	comicsite/comicLibrary/models.py	/^class ComicSeries(models.Model):$/;"	c
+ComicSeries	comicsite/comicLibrary/views.py	/^from comicLibrary.models import ComicSeries, Comic$/;"	i
+ComicSeries	comicsite/file_updater.py	/^from comicLibrary.models import Comic, ComicSeries$/;"	i
+DATABASES	comicsite/comicsite/settings.py	/^DATABASES = {$/;"	v
+DEBUG	comicsite/comicsite/settings.py	/^DEBUG = True$/;"	v
+Extractor	comicsite/comicLibrary/archive.py	/^class Extractor:$/;"	c
+Extractor	comicsite/comicLibrary/library_helpers.py	/^from comicLibrary.archive import Extractor$/;"	i
+FileWrapper	comicsite/comicLibrary/views.py	/^from django.core.servers.basehttp import FileWrapper$/;"	i
+Http404	comicsite/comicLibrary/views.py	/^from django.http import HttpResponse, Http404, HttpResponseRedirect$/;"	i
+HttpResponse	comicsite/comicLibrary/views.py	/^from django.http import HttpResponse, Http404, HttpResponseRedirect$/;"	i
+HttpResponseRedirect	comicsite/comicLibrary/views.py	/^from django.http import HttpResponse, Http404, HttpResponseRedirect$/;"	i
+INSTALLED_APPS	comicsite/comicsite/settings.py	/^INSTALLED_APPS = ($/;"	v
+LANGUAGE_CODE	comicsite/comicsite/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	v
+MEDIA_ROOT	comicsite/comicLibrary/library_helpers.py	/^from comicsite.settings import MEDIA_ROOT, COMIC_TEMP_FOLDER$/;"	i
+MEDIA_ROOT	comicsite/comicsite/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, "media")$/;"	v
+MEDIA_URL	comicsite/comicsite/settings.py	/^MEDIA_URL = 'media\/'$/;"	v
+MIDDLEWARE_CLASSES	comicsite/comicsite/settings.py	/^MIDDLEWARE_CLASSES = ($/;"	v
+Packer	comicsite/comicLibrary/archive.py	/^class Packer:$/;"	c
+Process	comicsite/comicLibrary/process.py	/^class Process:$/;"	c
+ROOT_URLCONF	comicsite/comicsite/settings.py	/^ROOT_URLCONF = 'comicsite.urls'$/;"	v
+STATICFILES_DIRS	comicsite/comicsite/settings.py	/^STATICFILES_DIRS = ($/;"	v
+STATIC_URL	comicsite/comicsite/settings.py	/^STATIC_URL = '\/static\/'$/;"	v
+TEMPLATE_DEBUG	comicsite/comicsite/settings.py	/^TEMPLATE_DEBUG = True$/;"	v
+TIME_ZONE	comicsite/comicsite/settings.py	/^TIME_ZONE = 'UTC'$/;"	v
+TestCase	comicsite/comicLibrary/tests.py	/^from django.test import TestCase$/;"	i
+USE_I18N	comicsite/comicsite/settings.py	/^USE_I18N = True$/;"	v
+USE_L10N	comicsite/comicsite/settings.py	/^USE_L10N = True$/;"	v
+USE_TZ	comicsite/comicsite/settings.py	/^USE_TZ = True$/;"	v
+WSGI_APPLICATION	comicsite/comicsite/settings.py	/^WSGI_APPLICATION = 'comicsite.wsgi.application'$/;"	v
+__init__	comicsite/comicLibrary/archive.py	/^    def __init__(self):$/;"	m	class:Extractor
+__init__	comicsite/comicLibrary/archive.py	/^    def __init__(self, image_files, other_files, archive_path, base_name):$/;"	m	class:Packer
+__init__	comicsite/comicLibrary/library_helpers.py	/^    def __init__(self,comic):$/;"	m	class:ComicCacheEntry
+__init__	comicsite/comicLibrary/process.py	/^    def __init__(self, args):$/;"	m	class:Process
+__str__	comicsite/comicLibrary/models.py	/^    def __str__(self):$/;"	m	class:Comic	file:
+__str__	comicsite/comicLibrary/models.py	/^    def __str__(self):$/;"	m	class:ComicSeries	file:
+_exec	comicsite/comicLibrary/process.py	/^    def _exec(self):$/;"	m	class:Process
+_extract_file	comicsite/comicLibrary/archive.py	/^    def _extract_file(self, name):$/;"	m	class:Extractor
+_format_substrings	comicsite/comicLibrary/library_helpers.py	/^    def _format_substrings(name):$/;"	f	function:alphanumeric_sort
+_get_rar_exec	comicsite/comicLibrary/archive.py	/^def _get_rar_exec():$/;"	f
+_rar_exec	comicsite/comicLibrary/archive.py	/^_rar_exec = None$/;"	v
+_thread_extract	comicsite/comicLibrary/archive.py	/^    def _thread_extract(self):$/;"	m	class:Extractor
+_thread_pack	comicsite/comicLibrary/archive.py	/^    def _thread_pack(self):$/;"	m	class:Packer
+admin	comicsite/comicLibrary/admin.py	/^from django.contrib import admin$/;"	i
+admin	comicsite/comicLibrary/models.py	/^from django.contrib import admin$/;"	i
+admin	comicsite/comicsite/urls.py	/^from django.contrib import admin$/;"	i
+alphanumeric_sort	comicsite/comicLibrary/library_helpers.py	/^def alphanumeric_sort(filenames):$/;"	f
+application	comicsite/comicsite/wsgi.py	/^application = get_wsgi_application()$/;"	v
+archive	comicsite/comicLibrary/models.py	/^    archive = models.FileField(upload_to="comics\/")$/;"	v	class:Comic
+archive_mime_type	comicsite/comicLibrary/archive.py	/^def archive_mime_type(path):$/;"	f
+close	comicsite/comicLibrary/archive.py	/^    def close(self):$/;"	m	class:Extractor
+comic_cache	comicsite/comicLibrary/library_helpers.py	/^    comic_cache = list()$/;"	v
+comic_cache	comicsite/comicLibrary/library_helpers.py	/^comic_cache = None$/;"	v
+comic_download	comicsite/comicLibrary/views.py	/^def comic_download(request, comic_id):$/;"	f
+comic_viewer	comicsite/comicLibrary/views.py	/^def comic_viewer(request, comic_id, page_num=1):$/;"	f
+create_comic	comicsite/file_updater.py	/^def create_comic(path, issue, series):$/;"	f
+create_series	comicsite/file_updater.py	/^def create_series(name):$/;"	f
+create_temp_dir	comicsite/comicLibrary/library_helpers.py	/^    def create_temp_dir(self, comic_name):$/;"	m	class:ComicCacheEntry
+detail	comicsite/comicLibrary/views.py	/^def detail(request, series_id):$/;"	f
+execute_from_command_line	comicsite/file_updater.py	/^    from django.core.management import execute_from_command_line$/;"	i
+execute_from_command_line	comicsite/manage.py	/^    from django.core.management import execute_from_command_line$/;"	i
+extract	comicsite/comicLibrary/archive.py	/^    def extract(self):$/;"	m	class:Extractor
+extract_comic	comicsite/comicLibrary/library_helpers.py	/^    def extract_comic(self, archive):$/;"	m	class:ComicCacheEntry
+extract_comic	comicsite/comicLibrary/models.py	/^    def extract_comic(self):$/;"	m	class:Comic
+gc	comicsite/comicLibrary/process.py	/^import gc$/;"	i
+get_archive_info	comicsite/comicLibrary/archive.py	/^def get_archive_info(path):$/;"	f
+get_comic_page	comicsite/comicLibrary/library_helpers.py	/^def get_comic_page(comic, page_num):$/;"	f
+get_comic_page	comicsite/comicLibrary/views.py	/^from comicLibrary.library_helpers import get_comic_page$/;"	i
+get_files	comicsite/comicLibrary/archive.py	/^    def get_files(self):$/;"	m	class:Extractor
+get_mime_type	comicsite/comicLibrary/archive.py	/^    def get_mime_type(self):$/;"	m	class:Extractor
+get_name	comicsite/comicLibrary/archive.py	/^def get_name(archive_type):$/;"	f
+get_object_or_404	comicsite/comicLibrary/views.py	/^from django.shortcuts import render, get_object_or_404$/;"	i
+get_page	comicsite/comicLibrary/library_helpers.py	/^    def get_page(self, page_num):$/;"	m	class:ComicCacheEntry
+get_wsgi_application	comicsite/comicsite/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	i
+include	comicsite/comicsite/urls.py	/^from django.conf.urls import patterns, include, url$/;"	i
+index	comicsite/comicLibrary/views.py	/^def index(request):$/;"	f
+is_ready	comicsite/comicLibrary/archive.py	/^    def is_ready(self, name):$/;"	m	class:Extractor
+issue	comicsite/comicLibrary/models.py	/^    issue = models.IntegerField()$/;"	v	class:Comic
+library_cache_lock	comicsite/comicLibrary/library_helpers.py	/^    library_cache_lock = threading.Lock()$/;"	v
+library_cache_lock	comicsite/comicLibrary/library_helpers.py	/^library_cache_lock = None$/;"	v
+login_required	comicsite/comicLibrary/views.py	/^from django.contrib.auth.decorators import login_required$/;"	i
+logout	comicsite/comicLibrary/views.py	/^from django.contrib.auth import logout$/;"	i
+logout_page	comicsite/comicLibrary/views.py	/^def logout_page(request):$/;"	f
+mimetypes	comicsite/comicLibrary/views.py	/^import mimetypes$/;"	i
+models	comicsite/comicLibrary/models.py	/^from django.db import models$/;"	i
+os	comicsite/comicLibrary/archive.py	/^import os$/;"	i
+os	comicsite/comicLibrary/library_helpers.py	/^import os$/;"	i
+os	comicsite/comicLibrary/views.py	/^import os$/;"	i
+os	comicsite/comicsite/settings.py	/^import os$/;"	i
+os	comicsite/comicsite/wsgi.py	/^import os$/;"	i
+os	comicsite/file_updater.py	/^import os$/;"	i
+os	comicsite/manage.py	/^import os$/;"	i
+pack	comicsite/comicLibrary/archive.py	/^    def pack(self):$/;"	m	class:Packer
+patterns	comicsite/comicLibrary/urls.py	/^from django.conf.urls import patterns, url$/;"	i
+patterns	comicsite/comicsite/urls.py	/^from django.conf.urls import patterns, include, url$/;"	i
+process	comicsite/comicLibrary/archive.py	/^from comicLibrary import process$/;"	i
+re	comicsite/comicLibrary/archive.py	/^import re$/;"	i
+re	comicsite/comicLibrary/library_helpers.py	/^import re$/;"	i
+render	comicsite/comicLibrary/views.py	/^from django.shortcuts import render, get_object_or_404$/;"	i
+series	comicsite/comicLibrary/models.py	/^    series = models.CharField(max_length=200)$/;"	v	class:ComicSeries
+series	comicsite/comicLibrary/models.py	/^    series = models.ForeignKey(ComicSeries)$/;"	v	class:Comic
+set_files	comicsite/comicLibrary/archive.py	/^    def set_files(self, files):$/;"	m	class:Extractor
+setup	comicsite/comicLibrary/archive.py	/^    def setup(self, src, dst):$/;"	m	class:Extractor
+shutil	comicsite/comicLibrary/library_helpers.py	/^import shutil$/;"	i
+spawn	comicsite/comicLibrary/process.py	/^    def spawn(self):$/;"	m	class:Process
+stop	comicsite/comicLibrary/archive.py	/^    def stop(self):$/;"	m	class:Extractor
+subprocess	comicsite/comicLibrary/process.py	/^import subprocess$/;"	i
+sys	comicsite/comicLibrary/archive.py	/^import sys$/;"	i
+sys	comicsite/file_updater.py	/^import sys$/;"	i
+sys	comicsite/manage.py	/^import sys$/;"	i
+tarfile	comicsite/comicLibrary/archive.py	/^import tarfile$/;"	i
+threading	comicsite/comicLibrary/archive.py	/^import threading$/;"	i
+threading	comicsite/comicLibrary/library_helpers.py	/^import threading$/;"	i
+update_files	comicsite/file_updater.py	/^def update_files():$/;"	f
+url	comicsite/comicLibrary/urls.py	/^from django.conf.urls import patterns, url$/;"	i
+url	comicsite/comicsite/urls.py	/^from django.conf.urls import patterns, include, url$/;"	i
+urlpatterns	comicsite/comicLibrary/urls.py	/^urlpatterns = patterns('',$/;"	v
+urlpatterns	comicsite/comicsite/urls.py	/^urlpatterns = patterns('',$/;"	v
+views	comicsite/comicLibrary/urls.py	/^from comicLibrary import views$/;"	i
+views	comicsite/comicsite/urls.py	/^from comicLibrary import views$/;"	i
+wait	comicsite/comicLibrary/archive.py	/^    def wait(self):$/;"	m	class:Extractor
+wait	comicsite/comicLibrary/archive.py	/^    def wait(self):$/;"	m	class:Packer
+wait	comicsite/comicLibrary/process.py	/^    def wait(self):$/;"	m	class:Process
+zipfile	comicsite/comicLibrary/archive.py	/^import zipfile$/;"	i
