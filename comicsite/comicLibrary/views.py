@@ -18,7 +18,7 @@ def index(request):
 @login_required(login_url="/login")
 def detail(request, series_id):
     s = get_object_or_404(ComicSeries, pk=series_id)
-    comics = s.comic_set.all()
+    comics = s.comic_set.order_by('issue')
     return render(request, 'comicLibrary/detail.html', {'series': s, 'comics': comics})
 
 #Deprecated view - we now use the comic_viewer
