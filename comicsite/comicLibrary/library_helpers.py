@@ -67,10 +67,12 @@ def get_comic_page(comic, page_num):
     comic_cache.append(new_entry)
     library_cache_lock.release()
     if old_entry:
+        print("Removing {0}".format(old_entry.dir_name))
         shutil.rmtree(old_entry.dir_name)
     return new_entry.get_page(page_num)
 
 #initialization of the global settings
 if not library_cache_lock:
     library_cache_lock = threading.Lock()
+    shutil.rmtree(COMIC_TEMP_FOLDER)
     comic_cache = list()
