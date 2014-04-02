@@ -8,5 +8,5 @@
         <a href="{% url 'comic_viewer' comic.id next_page %}">next</a>
     <br>
     {% load staticfiles %}
-    <a href="{% url 'comic_viewer' comic.id next_page %}"><img src="{% static page_image %}" /></a>
+    <a href="{% url 'comic_viewer' comic.id next_page %}"><img src="{% static page_image %}" width="98%" /></a>
 </ul>
