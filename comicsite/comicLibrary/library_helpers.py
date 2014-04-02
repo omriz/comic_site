@@ -20,7 +20,8 @@ class ComicCacheEntry(object):
 
     def create_temp_dir(self, comic_name):
         dir_name = COMIC_TEMP_FOLDER+comic_name
-        os.makedirs(dir_name, exist_ok=True)
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
         return dir_name
 
     def extract_comic(self, archive):
@@ -74,5 +75,5 @@ def get_comic_page(comic, page_num):
 #initialization of the global settings
 if not library_cache_lock:
     library_cache_lock = threading.Lock()
-    shutil.rmtree(COMIC_TEMP_FOLDER)
+    shutil.rmtree(COMIC_TEMP_FOLDER, ignore_errors=True) # if it is not there, no worries
     comic_cache = list()
