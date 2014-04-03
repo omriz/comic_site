@@ -29,7 +29,7 @@ class ComicCacheEntry(object):
         extractor.setup(archive, self.dir_name)
         extractor.extract()
         extractor.wait()
-        self.pages_list = [p for p in extractor.get_files() if p.endswith("jpg")]
+        self.pages_list = [p for p in extractor.get_files() if p.lower().endswith("jpg")]
         alphanumeric_sort(self.pages_list)
 
     def get_page(self, page_num):
