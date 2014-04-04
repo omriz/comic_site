@@ -7,7 +7,7 @@ import re
 import zipfile
 import tarfile
 import threading
-from comicLibrary import process
+import subprocess
 
 ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
 
@@ -60,11 +60,7 @@ class Extractor:
                 if _rar_exec is None:
                     print ('! Could not find RAR file extractor.')
                     return None
-            proc = process.Process([_rar_exec, 'vb', '--', src])
-            fd = proc.spawn()
-            self._files = [name.decode().rstrip(os.linesep) for name in fd.readlines()]
-            fd.close()
-            proc.wait()
+            self._files = subprocess.check_output([_rar_exec, 'vb', '--', src]).decode().split(os.linesep)
         else:
             print ('! Non-supported archive format:', src)
             return None
@@ -168,10 +164,8 @@ class Extractor:
                     print ('! Non-local tar member:', name, '\n')
             elif self._type == RAR:
                 if _rar_exec is not None:
-                    proc = process.Process([_rar_exec, 'x', '-kb', '-p-',
+                    subprocess.call([_rar_exec, 'x', '-kb', '-p-',
                         '-o-', '-inul', '--', self._src, name, self._dst])
-                    proc.spawn()
-                    proc.wait()
                 else:
                     print ('! Could not find RAR file extractor.')
         except Exception:
@@ -328,6 +322,9 @@ def _get_rar_exec():
     no such executable is found.
     """
     for command in ('unrar', 'rar'):
-        if process.Process([command]).spawn() is not None:
+        try:
+            subprocess.check_output(["which", command])
             return command
+        except subprocess.CalledProcessError:
+            pass
     return None
