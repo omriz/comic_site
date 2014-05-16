@@ -2,13 +2,35 @@ import threading
 import shutil
 import os
 import re
+import subprocess
 from comicsite.settings import MEDIA_ROOT, COMIC_TEMP_FOLDER
-from comicLibrary.archive import Extractor
+from exceptions import Exception
 #global lock for the comic_cache index
 library_cache_lock = None
 # Cache list
 CACHE_SIZE = 10
 comic_cache = None
+
+#File types
+CBR = 1
+CBZ = 2
+
+extractors = {
+        CBR: " ".join((subprocess.check_output(['which', 'unrar']).strip(), 'e')),
+        CBZ: subprocess.check_output(['which', 'unzip']).strip(),
+        }
+
+def NoExtractoException(Exception):pass
+
+def get_extractor(archive):
+    arc_name = archive.strip()
+    if arc_name.endswith('cbr') or arc_name.endswith('CBR'):
+        return extractors[CBR]
+    elif arc_name.endswith('cbz') or arc_name.endswith('CBZ'):
+        return extractors[CBZ]
+    else:
+        raise NoExtractoException("No extractor found for %s" % archive)
+
 
 class ComicCacheEntry(object):
     def __init__(self,comic):
@@ -25,11 +47,15 @@ class ComicCacheEntry(object):
         return dir_name
 
     def extract_comic(self, archive):
-        extractor = Extractor()
-        extractor.setup(archive, self.dir_name)
-        extractor.extract()
-        extractor.wait()
-        self.pages_list = [p for p in extractor.get_files() if p.lower().endswith("jpg")]
+        # Old Version
+        #New Version
+        extractor = get_extractor(archive)
+        current_dir = os.getcwd()
+        os.chdir(self.dir_name)
+        command_line = "%s \"%s\"" %(extractor, archive)
+        subprocess.Popen(command_line,shell=True).wait()
+        self.pages_list = [p for p in os.listdir('.') if p.lower().endswith("jpg")]
+        os.chdir(current_dir)
         alphanumeric_sort(self.pages_list)
 
     def get_page(self, page_num):
