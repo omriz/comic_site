@@ -2,17 +2,7 @@
 import os
 import argparse
 import re
-
-#Specific Django settings
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "comicsite.settings")
-from comicLibrary.models import Comic, ComicSeries
-
-
-def create_comic(path, issue, series):
-    new_comic = Comic(series=series, issue=issue, archive=path)
-    new_comic.save()
-    return new_comic
-
+from utils import ISSUE_RE, create_comic, get_series
 
 def update_files():
     parser = argparse.ArgumentParser(description="Library updater argument parser")
@@ -20,10 +10,9 @@ def update_files():
     parser.add_argument('--series', nargs="?")
     args = parser.parse_args()
     comic_dir = "/".join(args.dir.split("/")[1:])
-    series = ComicSeries.objects.get_or_create(series=args.series)[0]
-    comp_re = re.compile("^\D+(\d+)")
+    series = get_series(args.series)
     for comic in os.listdir(args.dir):
-        res = comp_re.match(comic)
+        res = ISSUE_RE.match(comic)
         if res:
             issue = int(res.groups()[0])
             new_comic = create_comic(os.path.join(comic_dir, comic), issue, series)
