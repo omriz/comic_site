@@ -1,3 +1,8 @@
+<style> 
+img { 
+max-width:98%; 
+} 
+</style> 
 <ul>
     {% if previous_page > 0 %}
         <a href="{% url 'comic_viewer' comic.id previous_page %}">previous</a>
@@ -8,5 +13,5 @@
         <a href="{% url 'comic_viewer' comic.id next_page %}">next</a>
     <br>
     {% load staticfiles %}
-    <a href="{% url 'comic_viewer' comic.id next_page %}"><img src="{% static page_image %}" width="98%" /></a>
+    <a href="{% url 'comic_viewer' comic.id next_page %}"><img src="{% static page_image %}" max_width="98%" /></a>
 </ul>
