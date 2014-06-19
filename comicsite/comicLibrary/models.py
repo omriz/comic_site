@@ -10,12 +10,13 @@ class ComicSeries(models.Model):
 class Comic(models.Model):
     series = models.ForeignKey(ComicSeries)
     issue = models.IntegerField()
-    archive = models.FileField(upload_to="comics/")
+    archive = models.FileField(upload_to = "comics/")
+    annual = models.BooleanField()
     def __str__(self):
-        return u"{0} #{1}".format(self.series, self.issue)
-    def extract_comic(self):
-        pass
-        
+        if self.annual:
+            return u"Annual {0} #{1}".format(self.series, self.issue)
+        else:
+            return u"{0} #{1}".format(self.series, self.issue)
     
 admin.site.register(ComicSeries)
 admin.site.register(Comic)

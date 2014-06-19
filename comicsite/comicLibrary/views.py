@@ -18,8 +18,9 @@ def index(request):
 @login_required(login_url="/login")
 def detail(request, series_id):
     s = get_object_or_404(ComicSeries, pk=series_id)
-    comics = s.comic_set.order_by('issue')
-    return render(request, 'comicLibrary/detail.html', {'series': s, 'comics': comics})
+    comics = s.comic_set.filter(annual = False).order_by('issue')
+    annuals = s.comic_set.filter(annual = True).order_by('issue')
+    return render(request, 'comicLibrary/detail.html', {'series': s, 'comics': comics, 'annuals': annuals})
 
 #Deprecated view - we now use the comic_viewer
 @login_required(login_url="/login")

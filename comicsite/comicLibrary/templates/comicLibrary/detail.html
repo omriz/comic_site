@@ -5,9 +5,16 @@
 </header>
 {% if series %}
     <ul>
+    <h2>Weekly</h2>
     {% for comic in comics %}
       <li><a href="{% url 'comic_viewer' comic.id 1 %}">{{ comic }}</a></li>
     {% endfor %}
+    {% if annuals %}
+    <h2>Annual</h2>
+        {% for comic in annuals %}
+            <li><a href="{% url 'comic_viewer' comic.id 1 %}">{{ comic }}</a></li>
+        {% endfor %}
+    {% endif %}
     </ul>
 {% else %}
     <p>No series available.</p>
